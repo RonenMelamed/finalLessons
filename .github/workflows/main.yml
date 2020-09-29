@@ -18,15 +18,12 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Integration tests prepare
-          run: |
-              docker build -t myrobot --file .github/workflows/Dockerfile-robot .
-        - name: Integration tests
-          run: |
-            docker run \
-              -v ${PWD}/reports:/opt/robotframework/reports:Z \
-              -v ${PWD}/e2e/:/opt/robotframework/tests:Z \
-              myrobot
+        - name: Robot Framework run tests
+          uses: joonvena/robotframework-docker-action@v0.1
+          env:
+            BROWSER: chrome
+            ROBOT_TESTS_DIR: e2e/tests
+            ROBOT_REPORTS_DIR: ${{ github.workspace }}/e2e/reports
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
