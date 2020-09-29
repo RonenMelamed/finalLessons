@@ -1,0 +1,9 @@
+FROM python
+
+RUN pip3 install robotframework
+
+WORKDIR /opt/robotframework/tests
+
+COPY . .
+
+ENTRYPOINT robot .
