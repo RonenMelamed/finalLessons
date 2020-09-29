@@ -32,7 +32,10 @@ jobs:
           if: always()
           with:
             name: reports
-            path: e2e/output.xml
+            path: |
+              e2e/output.xml
+              e2e/report.html
+              e2e/log.html
     deploy:
         runs-on: ubuntu-latest
         name: Deploy
