@@ -1,6 +1,9 @@
 FROM python
 
-RUN pip3 install robotframework robotframework-selenium2library && apt install -y chromium-chromedriver wget unzip && wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && mv chromedriver /usr/local/bin 
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && \
+  sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
+  apt-get update && \
+  pip3 install robotframework robotframework-selenium2library && apt install -y chromium-chromedriver wget unzip && wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && mv chromedriver /usr/local/bin 
 
 WORKDIR /opt/robotframework/tests
 
