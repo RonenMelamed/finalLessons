@@ -1,4 +1,4 @@
-FROM python:debian
+FROM python:rc-buster
 
 RUN apt install -y wget unzip chromium-browser && \
     pip3 install robotframework robotframework-selenium2library && \  
