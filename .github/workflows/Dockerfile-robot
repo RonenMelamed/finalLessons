@@ -1,6 +1,6 @@
 FROM python:rc-buster
 
-RUN apt install -y wget unzip chromium-browser && \
+RUN apt install -y wget unzip chromium && \
     pip3 install robotframework robotframework-selenium2library && \  
     wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && \
     unzip chromedriver_linux64.zip && \
