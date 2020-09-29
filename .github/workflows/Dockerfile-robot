@@ -2,7 +2,18 @@ FROM python:rc-buster
 
 RUN apt update -y && apt upgrade -y && \
     apt install -y wget unzip chromium && \
-    pip3 install robotframework robotframework-selenium2library && \  
+    pip3 install robotframework robotframework-selenium2library \
+        --no-cache-dir \
+        robotframework \
+        robotframework-databaselibrary \
+        robotframework-faker \
+        robotframework-ftplibrary \
+        robotframework-imaplibrary2 \
+        robotframework-pabot \
+        robotframework-requests \
+        robotframework-seleniumlibrary \
+        robotframework-sshlibrary \
+        PyYAML && \
     wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && \
     unzip chromedriver_linux64.zip && \
     chmod +x ./chromedriver && \
