@@ -1,6 +1,6 @@
 FROM python
 
-RUN pip3 install robotframework robotframework-selenium2library
+RUN pip3 install robotframework robotframework-selenium2library && apt-get install -y chrome-driver
 
 WORKDIR /opt/robotframework/tests
 
