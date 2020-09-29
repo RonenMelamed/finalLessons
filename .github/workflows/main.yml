@@ -28,7 +28,7 @@ jobs:
               -v ${PWD}/e2e/:/opt/robotframework/tests:Z \
               myrobot
         - name: Upload test results
-          uses: actions/upload-artifact@v1
+          uses: actions/upload-artifact@v2
           if: always()
           with:
             name: reports
