@@ -22,7 +22,6 @@ jobs:
           run: |
               docker build -t myrobot --file ./.github/workflows/Dockerfile-robot .
               docker run myrobot
-
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
