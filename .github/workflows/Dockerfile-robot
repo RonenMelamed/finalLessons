@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install --quiet --assume-yes python-dev python-pip
   wget --no-verbose --output-document /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
   unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver && \
   chmod +x /opt/chromedriver/chromedriver && \
-  ln -fs /opt/chromedriver/chromedriver /usr/local/bin/chromedriver && \
+  ln -fs /opt/chromedriver/chromedriver /usr/local/bin/chromedriver
 
 COPY . .
 
