@@ -8,7 +8,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${SERVER}         localhost:7272
-${BROWSER}        chrome
+${BROWSER}        headLesschrome
 ${DELAY}          0
 ${LOGIN URL}      https://calm-peak-58723.herokuapp.com/login/index.html
 ${MAIN_URL}    https://calm-peak-58723.herokuapp.com/main/main.html
