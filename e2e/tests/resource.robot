@@ -44,7 +44,6 @@ Open Chrome
     Call Method    ${chrome_options}    add_argument    --disable-gpu
     Call Method    ${chrome_options}    add_argument    --no-sandbox
     Create Webdriver    Chrome    chrome_options=${chrome_options}
-    Go To ${url}
 
 Valid Login
     Login   s@s.com    123123
@@ -64,7 +63,8 @@ Logout
     Run Keyword If   ${c}>0      Click Button Helper  ${LOGOUT_BTN}
 
 Open Browser To Login Page
-    Open Chrome    ${LOGIN URL}
+    Open Chrome    
+    Go To Login Page
     #Maximize Browser Window
     Set Selenium Speed    ${DELAY}
     Login Page Should Be Open
