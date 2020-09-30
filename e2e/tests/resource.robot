@@ -36,6 +36,14 @@ ${PROFILE_SAVE_CHANGES_BUTTON}   save_btn
 ${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[1]/div[4]/div/table
 ${TEACHER_CALENDAR_TABLE}   xpath://html/body/section/div/div[2]/div/div/table
 *** Keywords ***
+Open Chrome
+    [Arguments]    ${url}    ${lang}
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    headless
+    Call Method    ${chrome_options}    add_argument    disable-gpu
+    Create Webdriver    Chrome    chrome_options=${chrome_options}
+    Go To    ${url}
+
 Valid Login
     Login   s@s.com    123123
     Main Page Should Be Open
@@ -44,7 +52,7 @@ Valid Login
 
 Login
     [Arguments]    ${username}    ${password}
-    Open Browser To Login Page
+    Open Chrome To Login Page
     Input Username    ${username}
     Input Password    ${password}
     Click Button Helper  ${LOGIN BTN}
@@ -54,7 +62,7 @@ Logout
     Run Keyword If   ${c}>0      Click Button Helper  ${LOGOUT_BTN}
 
 Open Browser To Login Page
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Open Chrome    ${LOGIN URL}
     #Maximize Browser Window
     Set Selenium Speed    ${DELAY}
     Login Page Should Be Open
