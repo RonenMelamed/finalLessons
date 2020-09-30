@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install --quiet --assume-yes python-dev python-pip
   chmod +x /opt/chromedriver/chromedriver && \
   ln -fs /opt/chromedriver/chromedriver /usr/local/bin/chromedriver && \
 
-WORKDIR /opt/robotframework/tests
-
 COPY . .
 
 ENTRYPOINT robot -v BROWSER:HeadlessChrome -v APP_ENV:test -d reports e2e/test
