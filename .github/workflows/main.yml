@@ -18,19 +18,12 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        # - name: Run tests
-        #   run: |
-        #       docker build -t myrobot --file ./.github/workflows/Dockerfile-robot .
-        #       docker run myrobot
-        # - name: Robot Framework run tests
-        #   uses: joonvena/robotframework-docker-action@v0.1
-        #   env:
-        #     BROWSER: chrome
-        #     ROBOT_TESTS_DIR: e2e/tests
-        #     ROBOT_REPORTS_DIR: ${{ github.workspace }}/e2e/reports
         - name: test
           run: |
-            docker run --shm-size=1g -e BROWSER=headlesschrome -v ${{github.workspace}}/e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:latest
+            docker run --shm-size=1g -e BROWSER=headlesschrome \
+            -v ${{github.workspace}}/e2e:/opt/robotframework/tests:Z \
+            -v ${{github.workspace}}/:/opt/robotframework/reports:Z \
+            ppodgorsek/robot-framework:latest
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
