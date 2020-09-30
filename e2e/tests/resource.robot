@@ -37,7 +37,7 @@ ${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[1]/div[4]/div/table
 ${TEACHER_CALENDAR_TABLE}   xpath://html/body/section/div/div[2]/div/div/table
 *** Keywords ***
 Open Chrome
-    [Arguments] ${url}
+    [Arguments]     ${url}
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     Call Method    ${chrome_options}    add_argument    --disable-extensions
     Call Method    ${chrome_options}    add_argument    --headless
@@ -54,7 +54,7 @@ Valid Login
 
 Login
     [Arguments]    ${username}    ${password}
-    Open Chrome To Login Page
+    Open Browser To Login Page
     Input Username    ${username}
     Input Password    ${password}
     Click Button Helper  ${LOGIN BTN}
@@ -63,7 +63,7 @@ Logout
     ${c} =   Get Element Count   ${LOGOUT_BTN}
     Run Keyword If   ${c}>0      Click Button Helper  ${LOGOUT_BTN}
 
-Open Chrome To Login Page
+Open Browser To Login Page
     Open Chrome    ${LOGIN URL}
     #Maximize Browser Window
     Set Selenium Speed    ${DELAY}
