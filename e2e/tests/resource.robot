@@ -42,6 +42,10 @@ Open Chrome
     Call Method    ${chrome_options}    add_argument    --headless
     Call Method    ${chrome_options}    add_argument    --disable-gpu
     Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-accelerated-2d-canvas
+    Call Method    ${chrome_options}    add_argument    --disable-accelerated-jpeg-decoding
+    Call Method    ${chrome_options}    add_argument    --test-type=ui
+
     Create Webdriver    Chrome    chrome_options=${chrome_options}
 
 Valid Login
