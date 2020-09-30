@@ -37,12 +37,14 @@ ${TEACHER_CALENDAR_SCHEDULE_TABLE}  xpath://html/body/div[1]/div[4]/div/table
 ${TEACHER_CALENDAR_TABLE}   xpath://html/body/section/div/div[2]/div/div/table
 *** Keywords ***
 Open Chrome
+    [Arguments] ${url}
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     Call Method    ${chrome_options}    add_argument    --disable-extensions
     Call Method    ${chrome_options}    add_argument    --headless
     Call Method    ${chrome_options}    add_argument    --disable-gpu
     Call Method    ${chrome_options}    add_argument    --no-sandbox
     Create Webdriver    Chrome    chrome_options=${chrome_options}
+    Go To ${url}
 
 Valid Login
     Login   s@s.com    123123
@@ -62,7 +64,7 @@ Logout
     Run Keyword If   ${c}>0      Click Button Helper  ${LOGOUT_BTN}
 
 Open Chrome To Login Page
-    Open Chrome    ${LOGIN URL}    ${BROWSER}
+    Open Chrome    ${LOGIN URL}
     #Maximize Browser Window
     Set Selenium Speed    ${DELAY}
     Login Page Should Be Open
