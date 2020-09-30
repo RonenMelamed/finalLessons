@@ -19,7 +19,10 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
         - name: Run tests
-          image: 'Dockerfile-robot'
+          run: |
+              docker build -t myrobot --file ./.github/workflows/Dockerfile-robot .
+              docker run myrobot
+
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
