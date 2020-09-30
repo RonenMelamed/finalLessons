@@ -19,21 +19,29 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - name: Robot Framework run tests
-          uses: joonvena/robotframework-docker-action@v0.1
-          env:
-            BROWSER: chrome
-            ROBOT_TESTS_DIR: e2e/tests
-        #    ROBOT_REPORTS_DIR: ${{ github.workspace }}/e2e/reports
+        - name: Run tests
+          script: |
+              apt-get update && apt-get install --quiet --assume-yes python-dev python-pip unzip wget
+              echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+              wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+              apt update
+              apt install -y google-chrome-stable
+              cp requirements..txt /tmp/requirements.txt
+              pip install -r /tmp/requirements.txt
+              CHROMEDRIVER_VERSION=`wget --no-verbose --output-document - https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+              wget --no-verbose --output-document /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+              unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver
+              chmod +x /opt/chromedriver/chromedriver
+              ln -fs /opt/chromedriver/chromedriver /usr/local/bin/chromedriver
+              robot -v BROWSER:HeadlessChrome -v APP_ENV:test -d ${{github.workspace}}/reports ${{github.workspace}}/e2e
+
         - name: Upload test results
           uses: actions/upload-artifact@v2
           if: always()
           with:
             name: reports
             path: |
-              e2e/output.xml
-              e2e/report.html
-              e2e/log.html
+              reports
     deploy:
         runs-on: ubuntu-latest
         name: Deploy
